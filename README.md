@@ -30,7 +30,7 @@ Use Git for cloning the code to your local or below line for Ubuntu:
 
 	git clone <your-fork-git-link>
 
-A directory called EnglishPosTagger will be created. Or you can use below link for exploring the code:
+A directory called Corpus will be created. Or you can use below link for exploring the code:
 
 	git clone https://github.com/olcaytaner/Corpus-Py.git
 
