@@ -265,7 +265,8 @@ class Corpus:
         seed : int
             value to randomize shuffling.
         """
-        random.shuffle(self.sentences, seed)
+        random.seed(seed)
+        random.shuffle(self.sentences)
 
     def getTrainCorpus(self, foldNo: int, foldCount: int) -> Corpus:
         """
