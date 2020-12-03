@@ -18,4 +18,4 @@ class WordFormat(Enum):
     """
     Create 4-Gram words as output.
     """
-    LETTER_ = auto()
+    LETTER_4 = auto()
