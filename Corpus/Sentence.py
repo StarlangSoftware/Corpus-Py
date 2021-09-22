@@ -151,6 +151,20 @@ class Sentence:
             total += word.charCount()
         return total
 
+    def insertWord(self, i: int, newWord: Word):
+        """
+        The insertWord method takes an index and a word as inputs. It inserts the word at given index to words
+        list.
+
+        PARAMETERS
+        ----------
+        i : int
+            index.
+        newWord : Word
+            to add the words list.
+        """
+        self.words.insert(i, newWord)
+
     def replaceWord(self, i: int, newWord: Word):
         """
         The replaceWord method takes an index and a word as inputs. It removes the word at given index from words

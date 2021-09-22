@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='NlpToolkit-Corpus',
-    version='1.0.11',
+    version='1.0.12',
     packages=['Corpus'],
     url='https://github.com/StarlangSoftware/Corpus-Py',
     license='',
