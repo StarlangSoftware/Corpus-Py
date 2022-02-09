@@ -10,8 +10,8 @@ class TurkishSplitter(SentenceSplitter):
     def lowerCaseLetters(self) -> str:
         return TurkishLanguage.LOWERCASE_LETTERS
 
-    def shortCuts(self) -> [str]:
-        return {"alb", "bnb", "bkz", "bşk", "co", "dr", "dç", "der", "em", "gn",
+    def shortCuts(self) -> list:
+        return ["alb", "bnb", "bkz", "bşk", "co", "dr", "dç", "der", "em", "gn",
                 "hz", "kd", "kur", "kuv", "ltd", "md", "mr", "mö", "muh", "müh",
                 "no", "öğr", "op", "opr", "org", "sf", "tuğ", "uzm", "vb", "vd",
                 "yön", "yrb", "yrd", "üniv", "fak", "prof", "dz", "yd", "krm", "gen",
@@ -24,4 +24,4 @@ class TurkishSplitter(SentenceSplitter):
                 "km", "yb", "bk", "jr", "bn", "os", "mrs", "bld", "sen", "alm",
                 "sir", "ord", "dir", "yay", "man", "brm", "edt", "dec", "mah", "cad",
                 "vol", "kom", "sok", "apt", "elk", "mad", "ort", "cap", "ste", "exc",
-                "ef"}
+                "ef"]

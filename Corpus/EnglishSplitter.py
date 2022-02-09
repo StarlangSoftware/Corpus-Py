@@ -10,7 +10,7 @@ class EnglishSplitter(SentenceSplitter):
     def lowerCaseLetters(self) -> str:
         return EnglishLanguage.LOWERCASE_LETTERS
 
-    def shortCuts(self) -> [str]:
-        return {"dr", "prof", "org", "II", "III", "IV", "VI", "VII", "VIII", "IX",
+    def shortCuts(self) -> list:
+        return ["dr", "prof", "org", "II", "III", "IV", "VI", "VII", "VIII", "IX",
                 "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX",
-                "XX", "min", "km", "jr", "mrs", "sir"}
+                "XX", "min", "km", "jr", "mrs", "sir"]

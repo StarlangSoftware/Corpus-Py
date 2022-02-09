@@ -21,7 +21,7 @@ class SentenceSplitter:
         pass
 
     @abstractmethod
-    def shortCuts(self) -> [str]:
+    def shortCuts(self) -> list:
         pass
 
     def __listContains(self, currentWord: str) -> bool:
