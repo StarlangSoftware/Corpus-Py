@@ -34,6 +34,7 @@ class Corpus:
             self.fileName = fileName
             file = open(fileName, "r", encoding='utf8')
             lines = file.readlines()
+            file.close()
             if splitterOrChecker is not None:
                 if isinstance(splitterOrChecker, SentenceSplitter):
                     for line in lines:
