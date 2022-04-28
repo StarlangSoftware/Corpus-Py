@@ -200,7 +200,7 @@ class SentenceSplitter:
         """
         apostropheLetters = self.upperCaseLetters() + self.lowerCaseLetters() + Language.EXTENDED_LANGUAGE_CHARACTERS \
                             + Language.DIGITS
-        if i + 1 < len(line):
+        if i > 0 and i + 1 < len(line):
             previousChar = line[i - 1]
             nextChar = line[i + 1]
             return previousChar in apostropheLetters and nextChar in apostropheLetters
@@ -225,7 +225,7 @@ class SentenceSplitter:
         bool
             True if previous char and next char is a digit, False otherwise.
         """
-        if i + 1 < len(line) and i > 0:
+        if i > 0 and i + 1 < len(line) and i > 0:
             previousChar = line[i - 1]
             nextChar = line[i + 1]
             return previousChar in Language.DIGITS and nextChar in Language.DIGITS
@@ -250,7 +250,7 @@ class SentenceSplitter:
         bool
             True if previous char, next char and two next chars are digit, False otherwise.
         """
-        if i + 2 < len(line):
+        if i > 0 and i + 2 < len(line):
             previousChar = line[i - 1]
             nextChar = line[i + 1]
             twoNextChar = line[i + 2]
