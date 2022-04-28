@@ -225,7 +225,7 @@ class SentenceSplitter:
         bool
             True if previous char and next char is a digit, False otherwise.
         """
-        if i > 0 and i + 1 < len(line) and i > 0:
+        if i > 0 and i + 1 < len(line):
             previousChar = line[i - 1]
             nextChar = line[i + 1]
             return previousChar in Language.DIGITS and nextChar in Language.DIGITS
