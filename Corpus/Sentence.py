@@ -10,7 +10,9 @@ class Sentence:
 
     words: list
 
-    def __init__(self, fileOrStr=None, languageChecker: LanguageChecker = None):
+    def __init__(self,
+                 fileOrStr=None,
+                 languageChecker: LanguageChecker = None):
         """
         Another constructor of Sentence class which takes a fileName as an input. It reads each word in the file
         and adds to words list.
@@ -24,13 +26,13 @@ class Sentence:
         if isinstance(fileOrStr, io.StringIO):
             lines = fileOrStr.readlines()
             for line in lines:
-                wordList = line.split(" ")
-                for word in wordList:
+                word_list = line.split(" ")
+                for word in word_list:
                     self.words.append(Word(word))
             fileOrStr.close()
         elif isinstance(fileOrStr, str):
-            wordArray = fileOrStr.split(" ")
-            for word in wordArray:
+            word_array = fileOrStr.split(" ")
+            for word in word_array:
                 if len(word) > 0:
                     if languageChecker is None or languageChecker.isValidWord(word):
                         self.words.append(Word(word))
@@ -151,7 +153,9 @@ class Sentence:
             total += word.charCount()
         return total
 
-    def insertWord(self, i: int, newWord: Word):
+    def insertWord(self,
+                   i: int,
+                   newWord: Word):
         """
         The insertWord method takes an index and a word as inputs. It inserts the word at given index to words
         list.
@@ -165,7 +169,9 @@ class Sentence:
         """
         self.words.insert(i, newWord)
 
-    def replaceWord(self, i: int, newWord: Word):
+    def replaceWord(self,
+                    i: int,
+                    newWord: Word):
         """
         The replaceWord method takes an index and a word as inputs. It removes the word at given index from words
         list and then adds the given word to given index of words.
@@ -240,6 +246,9 @@ class Sentence:
         fileName : str
             file to write in.
         """
-        outFile = open(fileName, "w", encoding="utf8")
-        outFile.write(self.__str__() + "\n")
-        outFile.close()
+        out_file = open(fileName, "w", encoding="utf8")
+        out_file.write(self.__str__() + "\n")
+        out_file.close()
+
+    def __repr__(self):
+        return f"{self.words}"

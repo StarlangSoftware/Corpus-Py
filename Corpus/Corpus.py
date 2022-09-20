@@ -17,7 +17,9 @@ class Corpus:
     wordList: CounterHashMap
     fileName: str
 
-    def __init__(self, fileName=None, splitterOrChecker=None):
+    def __init__(self,
+                 fileName=None,
+                 splitterOrChecker=None):
         """
         Constructor of Corpus class which takes a file name as an input. Then reads the input file line by line
         and calls addSentence method with each read line.
@@ -236,11 +238,11 @@ class Corpus:
         int
             maximum length.
         """
-        maxLength = 0
+        max_length = 0
         for s in self.sentences:
-            if s.wordCount() > maxLength:
-                maxLength = s.wordCount()
-        return maxLength
+            if s.wordCount() > max_length:
+                max_length = s.wordCount()
+        return max_length
 
     def getAllWordsAsList(self) -> list:
         """
@@ -252,10 +254,10 @@ class Corpus:
         list
             Newly created and populated list.
         """
-        allWords = []
+        all_words = []
         for i in range(self.sentenceCount()):
-            allWords.append(self.getSentence(i).getWords())
-        return allWords
+            all_words.append(self.getSentence(i).getWords())
+        return all_words
 
     def shuffleSentences(self, seed: int):
         """
@@ -269,7 +271,9 @@ class Corpus:
         random.seed(seed)
         random.shuffle(self.sentences)
 
-    def getTrainCorpus(self, foldNo: int, foldCount: int) -> Corpus:
+    def getTrainCorpus(self,
+                       foldNo: int,
+                       foldCount: int) -> Corpus:
         """
         The getTrainCorpus method takes two integer inputs foldNo and foldCount for determining train data size and
         count of fold respectively. Initially creates a new empty Corpus, then finds the sentenceCount as N. Then,
@@ -289,15 +293,17 @@ class Corpus:
         Corpus
             The newly created and populated Corpus.
         """
-        trainCorpus = Corpus()
+        train_corpus = Corpus()
         N = self.sentenceCount()
         for i in range((foldNo * N) // foldCount):
-            trainCorpus.addSentence(self.sentences[i])
+            train_corpus.addSentence(self.sentences[i])
         for i in range(((foldNo + 1) * N) // foldCount, N):
-            trainCorpus.addSentence(self.sentences[i])
-        return trainCorpus
+            train_corpus.addSentence(self.sentences[i])
+        return train_corpus
 
-    def getTestCorpus(self, foldNo: int, foldCount: int) -> Corpus:
+    def getTestCorpus(self,
+                      foldNo: int,
+                      foldCount: int) -> Corpus:
         """
         The getTestCorpus method takes two integer inputs foldNo and foldCount for determining test data size and count
         of fold respectively. Initially creates a new empty Corpus, then finds the sentenceCount as N. Then, starting
@@ -316,8 +322,11 @@ class Corpus:
         Corpus
             The newly created and populated Corpus.
         """
-        testCorpus = Corpus()
+        test_corpus = Corpus()
         N = self.sentenceCount()
         for i in range((foldNo * N) // foldCount, ((foldNo + 1) * N) // foldCount):
-            testCorpus.addSentence(self.sentences[i])
-        return testCorpus
+            test_corpus.addSentence(self.sentences[i])
+        return test_corpus
+
+    def __repr__(self):
+        return f"{self.sentences}"

@@ -5,6 +5,7 @@ from Corpus.SentenceSplitter import SentenceSplitter
 
 
 class TurkishChecker(LanguageChecker):
+
     def isValidWord(self, word: str) -> bool:
         """
         The isValidWord method takes an input String as a word than define all valid characters as a validCharacters
@@ -30,12 +31,12 @@ class TurkishChecker(LanguageChecker):
         bool
             True if each char in word is valid, False otherwise.
         """
-        specialMeaningCharacters = "$\\_|@%#£§&><"
-        validCharacters = TurkishLanguage.LETTERS + TurkishLanguage.EXTENDED_LANGUAGE_CHARACTERS + \
+        special_meaning_characters = "$\\_|@%#£§&><"
+        valid_characters = TurkishLanguage.LETTERS + TurkishLanguage.EXTENDED_LANGUAGE_CHARACTERS + \
                           TurkishLanguage.DIGITS + SentenceSplitter.SEPARATORS + SentenceSplitter.SENTENCE_ENDERS + \
                           TurkishLanguage.ARITHMETIC_CHARACTERS + SentenceSplitter.PUNCTUATION_CHARACTERS + \
-                          specialMeaningCharacters
+                          special_meaning_characters
         for i in range(len(word)):
-            if word[i] not in validCharacters:
+            if word[i] not in valid_characters:
                 return False
         return True

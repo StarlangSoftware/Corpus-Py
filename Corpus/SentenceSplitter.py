@@ -42,7 +42,9 @@ class SentenceSplitter:
         """
         return currentWord in self.shortCuts()
 
-    def __isNextCharUpperCaseOrDigit(self, line: str, i: int) -> bool:
+    def __isNextCharUpperCaseOrDigit(self,
+                                     line: str,
+                                     i: int) -> bool:
         """
         The isNextCharUpperCaseOrDigit method takes a String line and an int i as inputs. First it compares each char in
         the input line with " " and SEPARATORS ({@literal ()[]{}"'״＂՛}) and increment i by one until a mismatch or end
@@ -70,7 +72,9 @@ class SentenceSplitter:
         else:
             return False
 
-    def __isPreviousWordUpperCase(self, line: str, i: int) -> bool:
+    def __isPreviousWordUpperCase(self,
+                                  line: str,
+                                  i: int) -> bool:
         """
         The isPreviousWordUpperCase method takes a String line and an int i as inputs. First it compares each char in
         the input line with " " and checks each char whether they are lowercase letters or one of the qxw. And decrement
@@ -97,7 +101,9 @@ class SentenceSplitter:
         else:
             return False
 
-    def __isNextCharUpperCase(self, line: str, i: int) -> bool:
+    def __isNextCharUpperCase(self,
+                              line: str,
+                              i: int) -> bool:
         """
         The isNextCharUpperCase method takes a String line and an int i as inputs. First it compares each char in
         the input line with " " and increment i by one until a mismatch or end of line.
@@ -147,7 +153,9 @@ class SentenceSplitter:
             return True
         return False
 
-    def __repeatControl(self, word: str, exceptionMode: bool) -> str:
+    def __repeatControl(self,
+                        word: str,
+                        exceptionMode: bool) -> str:
         """
         The repeatControl method takes a String word as an input, and a boolean exceptionMode and compress the
         repetitive chars. With the presence of exceptionMode it directly returns the given word. Then it declares a
@@ -179,7 +187,9 @@ class SentenceSplitter:
             i = i + 1
         return result
 
-    def __isApostrophe(self, line: str, i: int) -> bool:
+    def __isApostrophe(self,
+                       line: str,
+                       i: int) -> bool:
         """
         The isApostrophe method takes a String line and an integer i as inputs. Initially declares a String
         apostropheLetters which consists of abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ,
@@ -198,16 +208,18 @@ class SentenceSplitter:
         bool
             True if apostropheLetters contains previous char and next char, False otherwise.
         """
-        apostropheLetters = self.upperCaseLetters() + self.lowerCaseLetters() + Language.EXTENDED_LANGUAGE_CHARACTERS \
+        apostrophe_letters = self.upperCaseLetters() + self.lowerCaseLetters() + Language.EXTENDED_LANGUAGE_CHARACTERS \
                             + Language.DIGITS
         if i > 0 and i + 1 < len(line):
-            previousChar = line[i - 1]
-            nextChar = line[i + 1]
-            return previousChar in apostropheLetters and nextChar in apostropheLetters
+            previous_char = line[i - 1]
+            next_char = line[i + 1]
+            return previous_char in apostrophe_letters and next_char in apostrophe_letters
         else:
             return False
 
-    def __numberExistsBeforeAndAfter(self, line: str, i: int) -> bool:
+    def __numberExistsBeforeAndAfter(self,
+                                     line: str,
+                                     i: int) -> bool:
         """
         The numberExistsBeforeAndAfter method takes a String line and an integer i as inputs. Then, it returns true if
         the result of contains method, which compares the previous char and next char with 0123456789, returns true and
@@ -226,13 +238,15 @@ class SentenceSplitter:
             True if previous char and next char is a digit, False otherwise.
         """
         if i > 0 and i + 1 < len(line):
-            previousChar = line[i - 1]
-            nextChar = line[i + 1]
-            return previousChar in Language.DIGITS and nextChar in Language.DIGITS
+            previous_char = line[i - 1]
+            next_char = line[i + 1]
+            return previous_char in Language.DIGITS and next_char in Language.DIGITS
         else:
             return False
 
-    def __isTime(self, line: str, i: int) -> bool:
+    def __isTime(self,
+                 line: str,
+                 i: int) -> bool:
         """
         The isTime method takes a String line and an integer i as inputs. Then, it returns true if
         the result of the contains method, which compares the previous char, next char and two next chars with
@@ -251,11 +265,11 @@ class SentenceSplitter:
             True if previous char, next char and two next chars are digit, False otherwise.
         """
         if i > 0 and i + 2 < len(line):
-            previousChar = line[i - 1]
-            nextChar = line[i + 1]
-            twoNextChar = line[i + 2]
-            return previousChar in Language.DIGITS and nextChar in Language.DIGITS and \
-                   twoNextChar in Language.DIGITS
+            previous_char = line[i - 1]
+            next_char = line[i + 1]
+            two_next_char = line[i + 2]
+            return previous_char in Language.DIGITS and next_char in Language.DIGITS and \
+                   two_next_char in Language.DIGITS
         else:
             return False
 
@@ -311,161 +325,161 @@ class SentenceSplitter:
         list
             sentences list which holds split line.
         """
-        emailMode = False
-        webMode = False
+        email_mode = False
+        web_mode = False
         i = 0
-        specialQuotaCount = 0
-        roundParenthesisCount = 0
-        bracketCount = 0
-        curlyBracketCount = 0
-        quotaCount = 0
-        apostropheCount = 0
-        currentSentence = Sentence()
-        currentWord = ""
+        special_quota_count = 0
+        round_parenthesis_count = 0
+        bracket_count = 0
+        curly_bracket_count = 0
+        quota_count = 0
+        apostrophe_count = 0
+        current_sentence = Sentence()
+        current_word = ""
         sentences = []
         while i < len(line):
             if line[i] in SentenceSplitter.SEPARATORS:
-                if line[i] == '\'' and currentWord != "" and self.__isApostrophe(line, i):
-                    currentWord = currentWord + line[i]
+                if line[i] == '\'' and current_word != "" and self.__isApostrophe(line, i):
+                    current_word = current_word + line[i]
                 else:
-                    if currentWord != "":
-                        currentSentence.addWord(Word(self.__repeatControl(currentWord, webMode or emailMode)))
+                    if current_word != "":
+                        current_sentence.addWord(Word(self.__repeatControl(current_word, web_mode or email_mode)))
                     if line[i] != '\n':
-                        currentSentence.addWord(Word("" + line[i]))
-                    currentWord = ""
+                        current_sentence.addWord(Word("" + line[i]))
+                    current_word = ""
                     if line[i] == '{':
-                        curlyBracketCount = curlyBracketCount + 1
+                        curly_bracket_count = curly_bracket_count + 1
                     elif line[i] == '}':
-                        curlyBracketCount = curlyBracketCount - 1
+                        curly_bracket_count = curly_bracket_count - 1
                     elif line[i] == '\uFF02':
-                        specialQuotaCount = specialQuotaCount + 1
+                        special_quota_count = special_quota_count + 1
                     elif line[i] == '\u05F4':
-                        specialQuotaCount = specialQuotaCount - 1
+                        special_quota_count = special_quota_count - 1
                     elif line[i] == '“':
-                        specialQuotaCount = specialQuotaCount + 1
+                        special_quota_count = special_quota_count + 1
                     elif line[i] == '”':
-                        specialQuotaCount = specialQuotaCount - 1
+                        special_quota_count = special_quota_count - 1
                     elif line[i] == '‘':
-                        specialQuotaCount = specialQuotaCount + 1
+                        special_quota_count = special_quota_count + 1
                     elif line[i] == '’':
-                        specialQuotaCount = specialQuotaCount - 1
+                        special_quota_count = special_quota_count - 1
                     elif line[i] == '(':
-                        roundParenthesisCount = roundParenthesisCount + 1
+                        round_parenthesis_count = round_parenthesis_count + 1
                     elif line[i] == ')':
-                        roundParenthesisCount = roundParenthesisCount - 1
+                        round_parenthesis_count = round_parenthesis_count - 1
                     elif line[i] == '[':
-                        bracketCount = bracketCount + 1
+                        bracket_count = bracket_count + 1
                     elif line[i] == ']':
-                        bracketCount = bracketCount - 1
+                        bracket_count = bracket_count - 1
                     elif line[i] == '"':
-                        quotaCount = 1 - quotaCount
+                        quota_count = 1 - quota_count
                     elif line[i] == '\'':
-                        apostropheCount = 1 - apostropheCount
-                    if line[i] == '"' and bracketCount == 0 and specialQuotaCount == 0 and curlyBracketCount == 0 and \
-                            roundParenthesisCount == 0 and quotaCount == 0 and self.__isNextCharUpperCaseOrDigit(line,
+                        apostrophe_count = 1 - apostrophe_count
+                    if line[i] == '"' and bracket_count == 0 and special_quota_count == 0 and curly_bracket_count == 0 and \
+                            round_parenthesis_count == 0 and quota_count == 0 and self.__isNextCharUpperCaseOrDigit(line,
                                                                                                                  i + 1):
-                        sentences.append(currentSentence)
-                        currentSentence = Sentence()
+                        sentences.append(current_sentence)
+                        current_sentence = Sentence()
             else:
                 if line[i] in SentenceSplitter.SENTENCE_ENDERS:
-                    if line[i] == '.' and currentWord.lower() == "www":
-                        webMode = True
-                    if line[i] == '.' and currentWord != "" and (
-                            webMode or emailMode or (line[i - 1] in Language.DIGITS and not self.__isNextCharUpperCaseOrDigit(line, i + 1))):
-                        currentWord = currentWord + line[i]
-                        currentSentence.addWord(Word(currentWord))
-                        currentWord = ""
+                    if line[i] == '.' and current_word.lower() == "www":
+                        web_mode = True
+                    if line[i] == '.' and current_word != "" and (
+                            web_mode or email_mode or (line[i - 1] in Language.DIGITS and not self.__isNextCharUpperCaseOrDigit(line, i + 1))):
+                        current_word = current_word + line[i]
+                        current_sentence.addWord(Word(current_word))
+                        current_word = ""
                     else:
-                        if line[i] == '.' and (self.__listContains(currentWord) or self.__isNameShortcut(currentWord)):
-                            currentWord = currentWord + line[i]
-                            currentSentence.addWord(Word(currentWord))
-                            currentWord = ""
+                        if line[i] == '.' and (self.__listContains(current_word) or self.__isNameShortcut(current_word)):
+                            current_word = current_word + line[i]
+                            current_sentence.addWord(Word(current_word))
+                            current_word = ""
                         else:
-                            if currentWord != "":
-                                currentSentence.addWord(Word(self.__repeatControl(currentWord, webMode or emailMode)))
-                            currentWord = "" + line[i]
+                            if current_word != "":
+                                current_sentence.addWord(Word(self.__repeatControl(current_word, web_mode or email_mode)))
+                            current_word = "" + line[i]
                             i = i + 1
                             while i < len(line) and line[i] in SentenceSplitter.SENTENCE_ENDERS:
                                 i = i + 1
                             i = i - 1
-                            currentSentence.addWord(Word(currentWord))
-                            if roundParenthesisCount == 0 and bracketCount == 0 and curlyBracketCount == 0 and \
-                                    quotaCount == 0:
-                                if i + 1 < len(line) and line[i + 1] == '\'' and apostropheCount == 1 and \
+                            current_sentence.addWord(Word(current_word))
+                            if round_parenthesis_count == 0 and bracket_count == 0 and curly_bracket_count == 0 and \
+                                    quota_count == 0:
+                                if i + 1 < len(line) and line[i + 1] == '\'' and apostrophe_count == 1 and \
                                         self.__isNextCharUpperCaseOrDigit(line, i + 2):
-                                    currentSentence.addWord(Word("'"))
+                                    current_sentence.addWord(Word("'"))
                                     i = i + 1
-                                    sentences.append(currentSentence)
-                                    currentSentence = Sentence()
+                                    sentences.append(current_sentence)
+                                    current_sentence = Sentence()
                                 else:
                                     if i + 2 < len(line) and line[i + 1] == ' ' and line[i + 2] == '\'' and \
-                                            apostropheCount == 1 and self.__isNextCharUpperCaseOrDigit(line, i + 3):
-                                        currentSentence.addWord(Word("'"))
+                                            apostrophe_count == 1 and self.__isNextCharUpperCaseOrDigit(line, i + 3):
+                                        current_sentence.addWord(Word("'"))
                                         i += 2
-                                        sentences.append(currentSentence)
-                                        currentSentence = Sentence()
+                                        sentences.append(current_sentence)
+                                        current_sentence = Sentence()
                                     else:
                                         if self.__isNextCharUpperCaseOrDigit(line, i + 1):
-                                            sentences.append(currentSentence)
-                                            currentSentence = Sentence()
-                            currentWord = ""
+                                            sentences.append(current_sentence)
+                                            current_sentence = Sentence()
+                            current_word = ""
                 else:
                     if line[i] == ' ':
-                        emailMode = False
-                        webMode = False
-                        if currentWord != "":
-                            currentSentence.addWord(Word(self.__repeatControl(currentWord, webMode or emailMode)))
-                            currentWord = ""
+                        email_mode = False
+                        web_mode = False
+                        if current_word != "":
+                            current_sentence.addWord(Word(self.__repeatControl(current_word, web_mode or email_mode)))
+                            current_word = ""
                     else:
-                        if line[i] == '-' and not webMode and roundParenthesisCount == 0 and \
+                        if line[i] == '-' and not web_mode and round_parenthesis_count == 0 and \
                                 self.__isNextCharUpperCase(line, i + 1) and \
                                 not self.__isPreviousWordUpperCase(line, i - 1):
-                            if currentWord != "" and currentWord not in Language.DIGITS:
-                                currentSentence.addWord(Word(self.__repeatControl(currentWord, webMode or emailMode)))
-                            if currentSentence.wordCount() > 0:
-                                sentences.append(currentSentence)
-                            currentSentence = Sentence()
-                            roundParenthesisCount = 0
-                            bracketCount = 0
-                            curlyBracketCount = 0
-                            quotaCount = 0
-                            specialQuotaCount = 0
-                            if currentWord != "" and re.match("\\d+", currentWord):
-                                currentSentence.addWord(Word(currentWord + " -"))
+                            if current_word != "" and current_word not in Language.DIGITS:
+                                current_sentence.addWord(Word(self.__repeatControl(current_word, web_mode or email_mode)))
+                            if current_sentence.wordCount() > 0:
+                                sentences.append(current_sentence)
+                            current_sentence = Sentence()
+                            round_parenthesis_count = 0
+                            bracket_count = 0
+                            curly_bracket_count = 0
+                            quota_count = 0
+                            special_quota_count = 0
+                            if current_word != "" and re.match("\\d+", current_word):
+                                current_sentence.addWord(Word(current_word + " -"))
                             else:
-                                currentSentence.addWord(Word("-"))
-                            currentWord = ""
+                                current_sentence.addWord(Word("-"))
+                            current_word = ""
                         else:
                             if line[i] in SentenceSplitter.PUNCTUATION_CHARACTERS or \
                                     line[i] in Language.ARITHMETIC_CHARACTERS:
-                                if line[i] == ':' and (currentWord == "http" or currentWord == "https"):
-                                    webMode = True
-                                if webMode:
-                                    currentWord = currentWord + line[i]
+                                if line[i] == ':' and (current_word == "http" or current_word == "https"):
+                                    web_mode = True
+                                if web_mode:
+                                    current_word = current_word + line[i]
                                 else:
                                     if line[i] == ',' and self.__numberExistsBeforeAndAfter(line, i):
-                                        currentWord = currentWord + line[i]
+                                        current_word = current_word + line[i]
                                     else:
                                         if line[i] == ':' and self.__isTime(line, i):
-                                            currentWord = currentWord + line[i]
+                                            current_word = current_word + line[i]
                                         else:
                                             if line[i] == '-' and self.__numberExistsBeforeAndAfter(line, i):
-                                                currentWord = currentWord + line[i]
+                                                current_word = current_word + line[i]
                                             else:
-                                                if currentWord != "":
-                                                    currentSentence.addWord(
-                                                        Word(self.__repeatControl(currentWord, webMode or emailMode)))
-                                                currentSentence.addWord(Word("" + line[i]))
-                                                currentWord = ""
+                                                if current_word != "":
+                                                    current_sentence.addWord(
+                                                        Word(self.__repeatControl(current_word, web_mode or email_mode)))
+                                                current_sentence.addWord(Word("" + line[i]))
+                                                current_word = ""
                             else:
                                 if line[i] == '@':
-                                    currentWord = currentWord + line[i]
-                                    emailMode = True
+                                    current_word = current_word + line[i]
+                                    email_mode = True
                                 else:
-                                    currentWord = currentWord + line[i]
+                                    current_word = current_word + line[i]
             i = i + 1
-        if currentWord != "":
-            currentSentence.addWord(Word(self.__repeatControl(currentWord, webMode or emailMode)))
-        if currentSentence.wordCount() > 0:
-            sentences.append(currentSentence)
+        if current_word != "":
+            current_sentence.addWord(Word(self.__repeatControl(current_word, web_mode or email_mode)))
+        if current_sentence.wordCount() > 0:
+            sentences.append(current_sentence)
         return sentences
