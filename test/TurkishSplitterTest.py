@@ -44,6 +44,10 @@ class TurkishSplitterTest(unittest.TestCase):
         self.assertEqual(1, len(self.splitter.split("Burada II. Murat ve I. Ahmet oyun oynadı")))
         self.assertEqual(8, self.splitter.split("Burada II. Murat ve I. Ahmet oyun oynadı")[0].wordCount())
 
+    def test_Split7(self):
+        self.assertEqual(1, len(self.splitter.split("1.87 cm boyunda ve 84 kg ağırlığındaydı")))
+        self.assertEqual(7, self.splitter.split("1.87 cm boyunda ve 84 kg ağırlığındaydı")[0].wordCount())
+
 
 if __name__ == '__main__':
     unittest.main()
