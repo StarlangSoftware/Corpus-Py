@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='NlpToolkit-Corpus',
-    version='1.0.21',
+    version='1.0.22',
     packages=['Corpus'],
     url='https://github.com/StarlangSoftware/Corpus-Py',
     license='',
