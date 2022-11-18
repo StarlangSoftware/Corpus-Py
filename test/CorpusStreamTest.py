@@ -9,10 +9,10 @@ class CorpusTest(unittest.TestCase):
         word_count = 0
         corpus_stream = CorpusStream("../corpus.txt")
         corpus_stream.open()
-        sentence = corpus_stream.getSentence()
+        sentence = corpus_stream.getNextSentence()
         while sentence is not None:
             word_count = word_count + sentence.wordCount()
-            sentence = corpus_stream.getSentence()
+            sentence = corpus_stream.getNextSentence()
         corpus_stream.close()
         self.assertEqual(826680, word_count)
 

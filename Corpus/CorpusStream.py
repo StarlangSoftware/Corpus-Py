@@ -1,11 +1,11 @@
 from typing import IO
 
+from Corpus.AbstractCorpus import AbstractCorpus
 from Corpus.Sentence import Sentence
 
 
-class CorpusStream:
+class CorpusStream(AbstractCorpus):
 
-    file_name: str
     file: IO
 
     def __init__(self, fileName=None):
@@ -17,7 +17,7 @@ class CorpusStream:
     def close(self):
         self.file.close()
 
-    def getSentence(self) -> Sentence:
+    def getNextSentence(self) -> Sentence:
         line = self.file.readline()
         if line:
             return Sentence(line)

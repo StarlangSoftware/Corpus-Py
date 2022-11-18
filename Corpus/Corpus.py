@@ -2,6 +2,7 @@ from __future__ import annotations
 from DataStructure.CounterHashMap import CounterHashMap
 from Dictionary.Word import Word
 
+from Corpus.AbstractCorpus import AbstractCorpus
 from Corpus.LanguageChecker import LanguageChecker
 from Corpus.Paragraph import Paragraph
 from Corpus.Sentence import Sentence
@@ -10,12 +11,12 @@ from Corpus.SentenceSplitter import SentenceSplitter
 import random
 
 
-class Corpus:
+class Corpus(AbstractCorpus):
 
     paragraphs: list
     sentences: list
-    wordList: CounterHashMap
-    fileName: str
+    word_list: CounterHashMap
+    sentence_index: int
 
     def __init__(self,
                  fileName=None,
@@ -31,10 +32,11 @@ class Corpus:
         """
         self.sentences = []
         self.paragraphs = []
-        self.wordList = CounterHashMap()
+        self.word_list = CounterHashMap()
+        self.sentence_index = 0
         if fileName is not None:
-            self.fileName = fileName
-            file = open(fileName, "r", encoding='utf8')
+            self.file_name = fileName
+            file = open(self.file_name, "r", encoding='utf8')
             lines = file.readlines()
             file.close()
             if splitterOrChecker is not None:
@@ -79,7 +81,7 @@ class Corpus:
         self.sentences.append(s)
         for i in range(s.wordCount()):
             w = s.getWord(i)
-            self.wordList.put(w)
+            self.word_list.put(w)
 
     def numberOfWords(self) -> int:
         """
@@ -110,7 +112,7 @@ class Corpus:
         bool
             True if wordList has the given word, False otherwise.
         """
-        return Word(word) in self.wordList
+        return Word(word) in self.word_list
 
     def addParagraph(self, p: Paragraph):
         """
@@ -135,7 +137,7 @@ class Corpus:
         str
             file name.
         """
-        return self.fileName
+        return self.file_name
 
     def getWordList(self) -> set:
         """
@@ -146,7 +148,7 @@ class Corpus:
         set
             The keySet of wordList.
         """
-        return set(self.wordList.keys())
+        return set(self.word_list.keys())
 
     def wordCount(self) -> int:
         """
@@ -157,7 +159,7 @@ class Corpus:
         int
             The size of the wordList CounterHashMap.
         """
-        return len(self.wordList)
+        return len(self.word_list)
 
     def getCount(self, word: Word) -> int:
         """
@@ -173,7 +175,7 @@ class Corpus:
         int
             The count value of given word.
         """
-        return self.wordList[word]
+        return self.word_list[word]
 
     def sentenceCount(self) -> int:
         """
@@ -330,3 +332,17 @@ class Corpus:
 
     def __repr__(self):
         return f"{self.sentences}"
+
+    def open(self):
+        self.sentence_index = 0
+
+    def close(self):
+        self.sentence_index = 0
+
+    def getNextSentence(self) -> Sentence:
+        index = self.sentence_index
+        if self.sentence_index < len(self.sentences):
+            self.sentence_index = self.sentence_index + 1
+            return self.sentences[index]
+        else:
+            return None
