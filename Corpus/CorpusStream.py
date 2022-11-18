@@ -20,7 +20,7 @@ class CorpusStream(AbstractCorpus):
     def getNextSentence(self) -> Sentence:
         line = self.file.readline()
         if line:
-            return Sentence(line)
+            return Sentence(line.strip())
         else:
             return None
 
