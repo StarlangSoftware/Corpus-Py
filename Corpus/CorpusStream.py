@@ -29,7 +29,7 @@ class CorpusStream(AbstractCorpus):
         for i in range(lineCount):
             line = self.file.readline()
             if line:
-                sentences.append(Sentence(line))
+                sentences.append(Sentence(line.strip()))
             else:
                 break
         return sentences
