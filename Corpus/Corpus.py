@@ -334,12 +334,23 @@ class Corpus(AbstractCorpus):
         return f"{self.sentences}"
 
     def open(self):
+        """
+        Implements open method in AbstractCorpus. Initializes sentence pointer to zero.
+        """
         self.sentence_index = 0
 
     def close(self):
+        """
+        Implements close method in AbstractCorpus. Initializes sentence pointer to zero.
+        """
         self.sentence_index = 0
 
     def getNextSentence(self) -> Sentence:
+        """
+        Implements getSentence method in AbstractCorpus. Returns next sentence in the sentences array list and increments
+        sentence pointer. If there are no sentences to be read, returns null.
+        :return: Next sentence in the sentences array.
+        """
         index = self.sentence_index
         if self.sentence_index < len(self.sentences):
             self.sentence_index = self.sentence_index + 1

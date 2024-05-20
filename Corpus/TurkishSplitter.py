@@ -5,12 +5,24 @@ from Language.TurkishLanguage import TurkishLanguage
 class TurkishSplitter(SentenceSplitter):
 
     def upperCaseLetters(self) -> str:
+        """
+        Returns Turkish UPPERCASE letters.
+        :return: Turkish UPPERCASE letters.
+        """
         return TurkishLanguage.UPPERCASE_LETTERS
 
     def lowerCaseLetters(self) -> str:
+        """
+        Returns Turkish LOWERCASE letters.
+        :return: Turkish LOWERCASE letters.
+        """
         return TurkishLanguage.LOWERCASE_LETTERS
 
     def shortCuts(self) -> list:
+        """
+        Returns shortcut words in Turkish language.
+        :return: Shortcut words in Turkish language.
+        """
         return ["alb", "bnb", "bkz", "bşk", "co", "dr", "dç", "der", "em", "gn",
                 "hz", "kd", "kur", "kuv", "ltd", "md", "mr", "mö", "muh", "müh",
                 "no", "öğr", "op", "opr", "org", "sf", "tuğ", "uzm", "vb", "vd",
