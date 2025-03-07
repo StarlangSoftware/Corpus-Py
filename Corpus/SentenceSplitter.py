@@ -161,8 +161,9 @@ class SentenceSplitter:
         """
         The repeatControl method takes a String word as an input, and a boolean exceptionMode and compress the
         repetitive chars. With the presence of exceptionMode it directly returns the given word. Then it declares a
-        counter i and loops till the end of the given word. It compares the char at index i with the char at index (i+2)
-        if they are equal then it compares the char at index i with the char at index (i+1) and increments i by one and
+        counter i and loops till the end of the given word. It compares the char at index i with the char at index (i+3)
+        if they are equal then it compares the char at index i with the char at index (i+2) and if they are equal then
+        it compares the char at index i with the char at index (i+1) increments i by one and
         returns concatenated result String with char at index i.
 
         PARAMETERS
@@ -276,6 +277,13 @@ class SentenceSplitter:
             return False
 
     def __onlyOneLetterExistsBeforeOrAfter(self, line: str, i: int) -> bool:
+        """
+        The onlyOneLetterExistsBeforeOrAfter method takes a String line and an integer i as inputs. Then, it returns true if
+        only one letter exists before or after the given index, false otherwise.
+        :param line: String input to check.
+        :param i: index.
+        :return: true if only one letter exists before or after the given index, false otherwise.
+        """
         if i > 1 and i + 1 < len(line) - 2:
             return line[i - 2] in SentenceSplitter.PUNCTUATION_CHARACTERS or line[i - 2] in SentenceSplitter.SEPARATORS \
         or line[i - 2] == ' ' or line[i - 2] in SentenceSplitter.SENTENCE_ENDERS or line[i + 2] in SentenceSplitter.PUNCTUATION_CHARACTERS \
