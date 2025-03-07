@@ -48,6 +48,15 @@ class TurkishSplitterTest(unittest.TestCase):
         self.assertEqual(1, len(self.splitter.split("1.87 cm boyunda ve 84 kg ağırlığındaydı")))
         self.assertEqual(7, self.splitter.split("1.87 cm boyunda ve 84 kg ağırlığındaydı")[0].wordCount())
 
+    def test_Split8(self):
+        self.assertEqual("AAA", self.splitter.split("AA piller, AAA pillerin yaklaşık üç kat kapasitesine sahiptir")[0].getWord(3).getName())
+        self.assertEqual("yakala", self.splitter.split("Topu atıp yakalaaaa diye bağırdı")[0].getWord(2).getName())
+
+    def test_Split9(self):
+        self.assertEqual(1, len(self.splitter.split("Bunun yanı sıra erkek t-shirt modellerini klasik giyim tarzına uyarlayarak kullanmak da mümkündür")))
+        self.assertEqual(13, self.splitter.split("Bunun yanı sıra erkek t-shirt modellerini klasik giyim tarzına uyarlayarak kullanmak da mümkündür")[0].wordCount())
+        self.assertEqual(1, len(self.splitter.split("USB-C, USB-A’ya göre çok daha yüksek hızlarda aktarım sağlayabilir")))
+        self.assertEqual(10, self.splitter.split("USB-C, USB-A’ya göre çok daha yüksek hızlarda aktarım sağlayabilir")[0].wordCount())
 
 if __name__ == '__main__':
     unittest.main()
